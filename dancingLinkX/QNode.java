@@ -1,9 +1,6 @@
 package dancingLinkX;
 
 public class QNode {
-	// left, right, upper, lower
-	// name, size
-	// head pointer
 	public int indicator;
 	
 	public QNode leftQNode;
