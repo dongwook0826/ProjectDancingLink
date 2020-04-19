@@ -6,7 +6,6 @@ public class HeaderQNode extends QNode {
 	public int cnt = 0;
 	public boolean primary;
 	
-	// overrided
 	public HeaderQNode leftQNode;
 	public HeaderQNode rightQNode;
 	
