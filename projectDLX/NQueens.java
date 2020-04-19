@@ -29,7 +29,7 @@ public class NQueens extends ToricLinkedList {
 	}
 	
 	public static void main(String[] args){
-		final int N = 5;
+		final int N = 8;
 		final boolean T = true;
 		// final boolean F = false;
 		
