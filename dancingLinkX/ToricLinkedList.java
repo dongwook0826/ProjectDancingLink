@@ -71,6 +71,7 @@ public class ToricLinkedList {
 		for(int i=0; i<boolNodesRow.length; i++, colNd = colNd.rightQNode){
 			if(boolNodesRow[i]){
 				QNode qnd = new QNode(indicator);
+				// System.out.println(indicator);
 				
 				qnd.upperQNode = colNd.upperQNode;
 				qnd.lowerQNode = colNd;
@@ -93,7 +94,7 @@ public class ToricLinkedList {
 					first.leftQNode = qnd;
 				}
 			}
-		}
+		}// System.out.println();
 	}
 	
 	public void cover(HeaderQNode colNd){
@@ -151,10 +152,20 @@ public class ToricLinkedList {
 	}
 	
 	public void searchSolution(){
-		this.searchSolution(new SolutionFormatter());
+		this.searchSolution(new SolutionFormatter(), Integer.MAX_VALUE-1, Integer.MAX_VALUE-1);
 	}
 	
 	public void searchSolution(QNodeStackFormatter qnsfm){
+		this.searchSolution(qnsfm, Integer.MAX_VALUE-1, Integer.MAX_VALUE-1);
+	}
+	
+	public void searchSolution(QNodeStackFormatter qnsfm, int maxPrint){
+		this.searchSolution(qnsfm, Integer.MAX_VALUE-1, maxPrint);
+	}
+	
+	public void searchSolution(QNodeStackFormatter qnsfm, int maxCnt, int maxPrint){
+		// print up to y solutions
+		
 		// print every possible solution for exact cover problem
 		System.out.println(root.name);
 		System.out.println();
@@ -172,10 +183,17 @@ public class ToricLinkedList {
 					colNd = colNd.rightQNode;
 				}while(!colNd.primary);
 				if(colNd == root){ // solution found
-					System.out.printf("solution found : cnt %d\n", ++solutionCnt);
-					// printSolution(stack, depth);
-					System.out.printf(qnsfm.qNodeStackFormat(stack, depth));
-					System.out.println();
+					solutionCnt++;
+					if(solutionCnt > maxCnt){
+						System.out.println("too many solutions searched");
+						break;
+					}
+					if(solutionCnt <= maxPrint){
+						System.out.printf("solution found : cnt %d\n", solutionCnt);
+						// printSolution(stack, depth);
+						System.out.printf(qnsfm.qNodeStackFormat(stack, depth));
+						System.out.println();
+					}
 					depth--;
 					currentlyValid = false;
 					continue;
